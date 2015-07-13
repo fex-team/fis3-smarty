@@ -4,7 +4,7 @@
 
 var path = require('path');
 
-module.exports = function(fis, mount) {
+module.exports = function(fis, isMount) {
   var sets = {
     'namespace': '',
     'static': 'static',
@@ -118,7 +118,7 @@ module.exports = function(fis, mount) {
     });
   }
 
-  if (mount !== false) {
+  if (isMount !== false) {
     mount();
   }
 
