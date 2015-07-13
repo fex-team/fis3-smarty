@@ -10,6 +10,7 @@
 npm install -g fis3
 ```
 
+**配置使用**
 ```js
 // vi fis-conf.js
 
