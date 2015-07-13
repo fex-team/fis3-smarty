@@ -15,10 +15,18 @@ npm install -g fis3-smarty
 ```js
 // vi fis-conf.js
 
-require('fis3-smarty')(fis)
-fis.set('namespace', <namespace>)
+require('fis3-smarty')(fis);
+fis.set('namespace', <namespace>);
+
+// default media is `dev`，
+fis.media('dev').match('*', {
+    useHash: false,
+    optimizer: null
+});
+
 ```
 - `<namespace>` 当前模块唯一名字
+- `fis3 release` 时执行关闭了**md5**、**压缩**
 
 ### 本地测试服务
 
