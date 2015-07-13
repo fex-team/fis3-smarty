@@ -21,6 +21,14 @@ fis.set('namespace', <namespace>)
 
 ### 本地测试服务
 
+**安装本地模拟环境**
+
+```bash
+fis3 server install server-env
+```
+
+**启动服务**
+
 ```bash
 fis3 server start --type php --rewrite
 ```
