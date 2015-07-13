@@ -8,6 +8,7 @@
 
 ```
 npm install -g fis3
+npm install -g fis3-smarty
 ```
 
 **配置使用**
