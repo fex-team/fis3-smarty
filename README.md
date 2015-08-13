@@ -2,6 +2,11 @@
 
 基于 FIS3 的针对 Smarty 模板的前端工程解决方案
 
+### 文档
+
+- Smarty 插件、本地测试套件、上线指导等文档参见 [/doc/INDEX.md](doc/INDEX.md)
+- 构建工具文档参见 https://github.com/fex-team/fis3
+
 ### 使用方法
 
 **安装**
