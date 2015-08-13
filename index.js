@@ -74,7 +74,11 @@ module.exports = function(fis, isMount) {
       release: '/server-conf/${namespace}.conf'
     },
     // test & config
-    '/({test,config})/(**)': {
+    '/(test)/(**)': {
+      useMap: false,
+      release: '/$1/${namespace}/$2'
+    },
+    '/(config)/(**)': {
       useMap: false,
       release: '/$1/${namespace}/$2'
     },
