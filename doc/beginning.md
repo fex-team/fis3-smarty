@@ -31,6 +31,7 @@
 ├── fis-conf.js
 ├── page
 ├── plugin
+├── static
 ├── server.conf
 ├── smarty.conf
 ├── test
@@ -42,6 +43,7 @@
 |widget| 放一些 widget 我们暂定叫它组件|逻辑代码，最终上线|
 |page|   放一些页面，子站可能有多个页面|逻辑代码，最终上线|
 |plugin| 有一些 Smarty 的插件放入这个目录，当然一般只需要一个模块拥有即可，比如 common|逻辑代码，最终上线|
+|static|非组件静态资源|逻辑代码，最终上线|
 |test|   测试数据，放一些模拟数据|本地模拟测试使用|
 |server.conf  |本地测试的 URL 转发规则配置文件| 本地模拟测试使用|
 |smarty.conf     |本地测试的 Smarty 引擎的配置文件|本地模拟测试使用|
@@ -57,19 +59,23 @@
 ```
 /common/widget/header
 /common/widget/footer
+/common/static/mod.js
 /common/page/layout.tpl
 /common/plugin
 ```
-- `common/plugin` 一些 FIS 提供的 Smarty 插件或者你自定义的一些 Smarty 插件
+- `common/plugin` 一些 FIS 提供的 Smarty 插件或者你自定义的一些 Smarty 插件，可以在[此处下载](https://github.com/fex-team/fis-plus-smarty-plugin)
+- `mod.js` FIS 提供的轻量级 JS 模块化框架，简单易用，后续会有章节介绍
 
 *subsiteA*
 ```
 /subsiteA/widget/list-item
 /subsiteA/page/index.tpl
+/subsiteA/page/index.php
 ```
 
 *subsiteB*
 ```
 /subsiteB/widget/box
 /subsiteB/page/index.tpl
+/subsiteB/page/index.php
 ```
