@@ -15,7 +15,7 @@ npm install -g fis3-smarty
 ```js
 // vi fis-conf.js
 
-fis.require('fis3-smarty')(fis);
+fis.require('smarty')(fis);
 fis.set('namespace', <namespace>);
 
 // default media is `dev`，
