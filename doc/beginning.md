@@ -48,3 +48,28 @@
 |fis-conf.js     |fis3 的配置文件| fis3 构建工具使用 |
 
 *以上目录文件不是都必须需要，一般都会包含page、widget俩目录*
+
+可能从目录结构文件中有一半是提供给本地模拟环境的，所以请不要跟上线文件**搞混**
+
+说完了构造的目录结构，我们开始构造一个应用。
+
+*common*
+```
+/common/widget/header
+/common/widget/footer
+/common/page/layout.tpl
+/common/plugin
+```
+- `common/plugin` 一些 FIS 提供的 Smarty 插件或者你自定义的一些 Smarty 插件
+
+*subsiteA*
+```
+/subsiteA/widget/list-item
+/subsiteA/page/index.tpl
+```
+
+*subsiteB*
+```
+/subsiteB/widget/box
+/subsiteB/page/index.tpl
+```
