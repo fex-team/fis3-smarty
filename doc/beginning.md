@@ -49,7 +49,7 @@
 |static|非组件静态资源|逻辑代码，最终上线|
 |test|   测试数据，放一些模拟数据|本地模拟测试使用|
 |server.conf  |本地测试的 URL 转发规则配置文件| 本地模拟测试使用|
-|smarty.conf     |本地测试的 Smarty 引擎的配置文件|本地模拟测试使用|
+|smarty.conf     |本地测试的 Smarty 引擎的配置文件，common 模块包含即可|本地模拟测试使用|
 |fis-conf.js     |fis3 的配置文件| fis3 构建工具使用 |
 
 *以上目录文件不是都必须需要，一般都会包含page、widget俩目录*
@@ -67,7 +67,7 @@
 /common/plugin
 ```
 - `common/plugin` 一些 FIS 提供的 Smarty 插件或者你自定义的一些 Smarty 插件，可以在[此处下载](https://github.com/fex-team/fis-plus-smarty-plugin)
-- `mod.js` FIS 提供的轻量级 JS 模块化框架，简单易用，后续会有章节介绍
+- `mod.js` FIS 提供的轻量级 JS 模块化框架，简单易用，后续会有章节介绍，你可以在 [/fex-team/mod](https://github.com/fex-team/mod) 找到它
 
 *subsiteA*
 ```
@@ -80,5 +80,7 @@
 ```
 /subsiteB/widget/box
 /subsiteB/page/index.tpl
-/subsiteB/page/index.php
+/subsiteB/page/index.json
 ```
+
+**例子下载** [site.zip]()

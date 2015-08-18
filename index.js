@@ -85,6 +85,9 @@ module.exports = function(fis, isMount) {
     '${namespace}-map.json': {
       release: '/config/$0'
     },
+    '*.sh': {
+      release: '$0'
+    },
     '::package': {
       prepackager: [
         fis.plugin('widget-inline'),
