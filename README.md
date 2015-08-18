@@ -16,6 +16,10 @@ npm install -g fis3
 npm install -g fis3-smarty
 ```
 
+**mod.js**
+
+mod.js 更新到最新，下载地址 [fex-team/mod](https://github.com/fex-team/mod)
+
 **配置使用**
 ```js
 // vi fis-conf.js
