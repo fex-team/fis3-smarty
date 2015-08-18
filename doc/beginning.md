@@ -123,7 +123,8 @@ fis3 server install server-env
 - php-cgi >= 5.2.17
 
 > 这块注意，很多 Mac 使用 Homebrew 安装的都不带 php-cgi，需要在安装时指定编译选项
->> `brew install php55 --with-cgi --with-curl` <br>
+>> `brew install php55 --with-cgi --with-curl`
+
 > Java 安装完以后需要设置环境变量，切记。
 
 
