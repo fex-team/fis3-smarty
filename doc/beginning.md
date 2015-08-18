@@ -83,4 +83,4 @@
 /subsiteB/page/index.json
 ```
 
-**例子下载** [site.zip]()
+**例子下载** [site.zip](https://github.com/fex-team/fis3-smarty/blob/master/doc/demo/size.zip?raw=true)
