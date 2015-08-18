@@ -94,3 +94,43 @@
 ```
 
 **例子下载** [site.zip](https://github.com/fex-team/fis3-smarty/blob/master/doc/demo/size.zip?raw=true)
+
+### 构建
+
+假定你已经看过 FIS3 的相关文档（http://fis.baidu.com)。
+
+首先下载 demo，然后解压，进入这个目录，执行以下命令对所有模块进行构建发布。
+
+```
+fis3 release -r common
+fis3 release -r subsiteA
+fis3 release -r subsiteB
+```
+
+可能有人会问，能否一条命令就构建三个模块，在此处明确说明这是不能的，至少暂时不支持。
+
+### 预览
+
+首先保证你安装了本地**测试模拟环境**套件，如果你忘了安装，按照一下命令安装。
+
+```
+fis3 server install server-env
+```
+
+启动本地测试服务进行预览，本地测试服务以来环境
+
+- java >= 1.6.0
+- php-cgi >= 5.2.17
+
+> 这块注意，很多 Mac 使用 Homebrew 安装的都不带 php-cgi，需要在安装时指定编译选项
+>> `brew install php55 --with-cgi --with-curl`
+> Java 安装完以后需要设置环境变量，切记。
+
+
+执行以下命令启动服务
+
+```
+fis3 server start --type php --rewrite
+```
+
+执行成功的话，会打开你的默认浏览器并得出 Demo 的运行结果。
