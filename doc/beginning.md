@@ -60,27 +60,37 @@
 
 *common*
 ```
-/common/widget/header
-/common/widget/footer
-/common/static/mod.js
-/common/page/layout.tpl
-/common/plugin
+/fis-conf.js
+/page/layout.tpl
+/plugin
+/server.conf
+/smarty.conf
+/static/layout.less
+/static/mod.js
+/static/reset.css
+/widget/footer
+/widget/header
 ```
 - `common/plugin` 一些 FIS 提供的 Smarty 插件或者你自定义的一些 Smarty 插件，可以在[此处下载](https://github.com/fex-team/fis-plus-smarty-plugin)
 - `mod.js` FIS 提供的轻量级 JS 模块化框架，简单易用，后续会有章节介绍，你可以在 [/fex-team/mod](https://github.com/fex-team/mod) 找到它
 
 *subsiteA*
 ```
-/subsiteA/widget/list-item
-/subsiteA/page/index.tpl
-/subsiteA/page/index.php
+/fis-conf.js
+/page/index.tpl
+/server.conf
+/test/page/index.php
+/widget/post-list
+/widget/post-list-item
 ```
 
 *subsiteB*
 ```
-/subsiteB/widget/box
-/subsiteB/page/index.tpl
-/subsiteB/page/index.json
+/fis-conf.js
+/page/index.tpl
+/server.conf
+/test/page/index.php
+/widget/post
 ```
 
 **例子下载** [site.zip](https://github.com/fex-team/fis3-smarty/blob/master/doc/demo/size.zip?raw=true)
