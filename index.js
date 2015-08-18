@@ -39,7 +39,7 @@ module.exports = function(fis, isMount) {
     '*.png': {
       optimizer: fis.plugin('png-compressor')
     },
-    '*.tpl': {
+    '/(**.tpl)': {
       preprocessor: fis.plugin('extlang'),
       postprocessor: fis.plugin('require-async'),
       optimizer: [
@@ -47,7 +47,7 @@ module.exports = function(fis, isMount) {
         fis.plugin('html-compress')
       ],
       useMap: true,
-      release: '/${template}/${namespace}/$0'
+      release: '/${template}/${namespace}/$1'
     },
     '*.{tpl,js}': {
       useSameNameRequire: true
@@ -72,6 +72,9 @@ module.exports = function(fis, isMount) {
     },
     'server.conf': {
       release: '/server-conf/${namespace}.conf'
+    },
+    '/static/(**)': {
+      release: '/${static}/${namespace}/$1'
     },
     // test & config
     '/(test)/(**)': {
