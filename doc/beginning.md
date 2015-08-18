@@ -117,7 +117,7 @@ fis3 release -r subsiteB
 fis3 server install server-env
 ```
 
-启动本地测试服务进行预览，本地测试服务以来环境
+启动本地测试服务进行预览，本地测试服务依赖
 
 - java >= 1.6.0
 - php-cgi >= 5.2.17
