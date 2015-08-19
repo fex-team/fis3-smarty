@@ -261,3 +261,87 @@ fis.match('*.js', {
     domain: '/public' // 如果 $base_url == /public
 });
 ```
+
+配置完打包、CDN 等可以再重新发布预览看看效果，等本地都开发完成后，需要跟后端进行联调。
+
+### 发布测试机
+
+联调的时候需要发布测试机，这也是 FIS 提供的一个常用功能，当发布到测试机时只需要给文件指定 `deploy` 属性，并启用一个发布远端 deploy 插件，比如常用的 `http-push`。
+
+发布测试机的方法在 FIS 官网也做了[说明](http://fis.baidu.com/fis3/docs/beginning/debug.html#%E5%8F%91%E5%B8%83%E5%88%B0%E8%BF%9C%E7%AB%AF%E6%9C%BA%E5%99%A8)。
+
+这块之所以要重新写出来是因为，发布到服务器上跑起来是需要按照 Smarty 的一些配置进行对应文件发布的
+
+- `.tpl` 发布到 Smarty 的 `template_dir` 目录下
+- `plugin/*.php` 需要发布到 Smarty 的 `plugins_dir` 目录下
+- `config/*.json` 编译会产出一些 `*.json` 文件，即静态资源映射表；需要发不到 Smarty 的 `config_dir` 目录下
+- 其他静态资源需要发布到静态资源 `webroot` 下
+
+需要按照以上说明上传资源。
+
+假设
+
+```bash
+/home/work/odp/template # template_dir
+/home/work/odp/template/config # config_dir
+/home/work/odp/webroot # webroot
+/home/work/odp/smarty/plugin # plugins_dir
+```
+
+那么上传配置如下
+
+```js
+var RECEIVER = 'http://qa.0.q1.baidu.com:8099/receiver.php'; // 接收端 url
+// vi fis-conf.js
+
+// 静态资源
+fis.match('*', {
+    deploy: fis.plugin('http-push', {
+        receiver: RECEIVER,
+        to: '/home/work/webroot' // to = $to + $file.release
+    })
+});
+
+// map.json
+fis.match('*-map.json', {
+    deploy: fis.plugin('http-push', {
+        receiver: RECEIVER,
+        to: '/home/work/odp/template' // to = $to + $file.release
+    })
+});
+
+// smarty 插件
+fis.match('/plugin/*.php', {
+    deploy: fis.plugin('http-push', {
+        receiver: RECEIVER,
+        to: '/home/work/smarty' // to = $to + $file.release
+    })
+})
+
+// 模板
+fis.match('*.tpl', {
+    deploy: fis.plugin('http-push', {
+        receiver: RECEIVER,
+        to: '/home/work/odp' // to = $to + $file.release
+    })
+});
+```
+
+**注意**以上对 `http-push` 设置的 `to` 属性，最终某个文件上传到测试机器的路径是 `$to + $file.release`，即配置的 `to` 属性值加上文件的最终 `release` 路径。
+
+具体查看某一个文件的 `release` 值可以使用
+
+```
+$ fis3 inspect --files='/plugin/FISResource.class.php'
+
+ ~ /plugin/FISResource.class.php
+ -- release /plugin/FISResource.class.php `/{plugin,smarty.conf,domain.conf,**.php}`   (12th)
+
+
+ ~ ::packager
+ -- empty
+```
+
+我们就得到了 `FISResource.class.php` `release` 属性的值，那么最终传到远端机器的路径为 `/home/work/odp/smarty/plugin/FISResource.class.php`。
+
+很多同学设置 `http-push` 属性 `to` 时设置的居然是本机的路径，再次强调这个属性的值是远端机器的路径，即部署了 `receiver.php` 机器的路径。
