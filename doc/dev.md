@@ -303,7 +303,7 @@ body {
 
 FIS 模块化组件加载接口，加载某个模板并收集模板依赖的所有静态资源。
 
-```
+```smarty
 {%widget name="common:widget/header/header.tpl"%}
 ```
 
@@ -311,7 +311,7 @@ FIS 模块化组件加载接口，加载某个模板并收集模板依赖的所�
 
 **widget** 局部变量
 
-```
+```smarty
 {%widget name="common:widget/header/header.tpl" info=$data.header.info%}
 ```
 
