@@ -15,6 +15,7 @@ fis3-smarty 作为 fis 时代 fis-plus 解决方案的替代品，针对 Smarty 
     + [上线](./beginning.md#上线)
 - [开发](./dev.md)
     + [模块化开发](./dev.md#模块化开发)
+    + [前端模板的使用](./dev.md#前端模板的使用)
     + [Smarty插件](./dev.md#smarty插件)
     + [本地测试服务](./dev.md#本地测试服务)
 - [测试联调](./test.md)
