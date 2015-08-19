@@ -142,5 +142,158 @@ console.log(tmpl(data)); // render 出 html 结果
 
 介绍提供的 Smarty 插件的使用方法；
 
+Smarty 解决方案通过 Smarty 插件的方式来做静态资源管理运算以及一些转义操作。
+
+```
+block.widget_inline.php
+compiler.body.php
+compiler.head.php
+compiler.html.php
+compiler.placeholder.php
+compiler.require.php
+compiler.script.php
+compiler.style.php
+compiler.uri.php
+compiler.widget.php
+function.http_header.php
+modifier.f_escape_callback.php
+modifier.f_escape_data.php
+modifier.f_escape_event.php
+modifier.f_escape_js.php
+modifier.f_escape_path.php
+modifier.f_escape_xml.php
+```
+
+#### html
+
+替换 `html` 标签，**必须**
+
+```smarty
+{%html%}
+
+{%/html%}
+```
+
+定义属性：
+
+- `framework` 设置 mod.js 的 ID，为了确认哪个文件是模块化框架
+    
+    ```smarty
+    {%html framework="common:static/mod.js"%}
+        ...
+    {%/html%}
+    ```
+
+#### head
+
+替换 `head` 标签，**必须**
+
+用来标记 `</head>` 的位置，最终计算收集到的 css 会替换到 `</head>` 前。
+
+```smarty
+{%head%}
+    <title></title>
+{%/head%}
+```
+
+#### body
+
+替换 `body` 标签，**必须**
+
+标记 `</body>` 的位置，最终计算收集的 js 以及内嵌 script 替换到 `</body>` 后。
+
+```smarty
+{%body%}
+    <div>
+    ...
+    </div>
+{%/body%}
+```
+
+如果需要给body开始标签添加属性，通过以下方式。
+
+```smarty
+{%body prop="value"%}
+    ...
+{%/body%}
+```
+
+#### script
+
+替换 `script` 标签，**非必须**
+
+如果内嵌资源中引用了（`require`）某个组件化 js ，就必须放到此标签内；此标签内的 js 最后会收集起来统一放置到 `</body>` 后。
+
+如果有些内嵌脚本，如统计脚本，不想被收集到最后面，直接使用原生标签即可。
+
+```smarty
+{%script%}
+var c = require('/widget/ui/a/a.js');
+{%/script%}
+```
+
+#### style
+
+替换 `style` 标签，**非必须**
+
+收集内嵌的 css 资源到 `</head>` 前，但在所有 link 资源后，这个顺序需要特别注意一下。收集内嵌 css 资源到同一个 `style` 标签下有助于页面渲染性能。
+
+如果不想被收集，使用原生标签即可。
+
+```smarty
+{%style%}
+body {
+    background-color: #CCCCCC;
+}
+{%/style%}
+```
+
+#### require
+
+模板层面的资源加载接口，如果使用原生 `link` 或者 `script` 引用资源不会被收集起来放到 `</body>` 标签后面，所以就有了这个接口。
+
+支持 js、css 等资源，支持对外部链接。
+
+**此接口可以加载任意资源，不需要非得是组件化资源，但只是告诉后端框架你需要加载哪些资源，最终的结果是资源只会被加载，包括其依赖。如果是 js 组件，并不会由于调用这个接口直接触发执行组件逻辑**
+
+```smarty
+{%require name="common:static/a.js"%}
+```
+
+- name 参数为 ID
+
+    ID = <模块名>:<资源相对于模块根目录的路径>
+
+    ```
+    /common/a.js  => id = common:a.js
+    /common/static/b.js => id = common:static/b.js  
+    ```
 
 
+```smarty
+{%require src="http://img.baidu.com/m.js"%}
+```
+
+- src 外部资源的 url
+    
+    如果不以 `.js`、`.css` 结尾，需要设置属性 type 指明具体类型。
+
+- type 非必须，当引入资源不已 `.js`、`.css` 结尾时使用。值 `js` 或者 `css`
+
+    ```smarty
+    {%require src="http://12.baidu.com/xxxx/xxxxxx" type="js"%}
+    ```
+
+#### uri
+
+动态获得某个路径的最终 `url`。
+
+由于 FIS 构建时会根据配置给资源添加 cdn、md5戳，这个给编码带来了一些麻烦。`uri` 接口可以动态获取资源的最终 `url`
+
+```
+{%$logo_url="{%uri name="common:static/a.js"%}"%}
+```
+
+- name 资源的 ID
+
+**注意** `require` 和 `uri` 处理的资源必须在 **静态资源映射表** 中有记录，如果没有记录无法正常工作。
