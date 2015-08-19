@@ -238,13 +238,15 @@ fis.match ('*.js', {
 
 #### 扩展阅读
 
-当然这个功能同样适用于哪些需要后端同学传一个
+当然这个功能同样适用于那些需要后端同学传一个 `$base_url` 的场景；
 
 ```php
 <script src="<?=$base_url?>/static/a.js"></script>
 ```
 
-的场景。
+这样就导致 FIS 在编译的时候找不到 `a.js` 并无法替换 url。
+
+**解决办法**如下：
 
 开发时只需要
 
@@ -259,5 +261,3 @@ fis.match('*.js', {
     domain: '/public' // 如果 $base_url == /public
 });
 ```
-
-这也解释了很多跟后端结合时不知道这个 `$base_url` 怎么处理的情形。
