@@ -35,7 +35,7 @@ fis.media('dev').match('*', {
 
 ```
 - `<namespace>` 当前模块唯一名字
-- `fis3 release` 时执行时关闭 **md5**、**压缩**
+- `fis3 release` 执行时关闭 **md5**、**压缩**
 
 ### 本地测试服务
 

@@ -139,3 +139,5 @@ fis3 server start --type php --rewrite
 ```
 
 执行成功的话，会打开你的默认浏览器并得出 Demo 的运行结果。
+
+![](./img/home.png)
