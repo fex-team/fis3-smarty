@@ -287,6 +287,7 @@ fis.match('*.js', {
 /home/work/odp/webroot # webroot
 /home/work/odp/smarty/plugin # plugins_dir
 ```
+> baidu 使用 odp 的同学只需要查看 odp/conf/smarty.conf 即可获得这些目录信息。
 
 那么上传配置如下
 
