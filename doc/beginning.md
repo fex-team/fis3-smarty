@@ -61,6 +61,7 @@
 |server.conf  |本地测试的 URL 转发规则配置文件| 本地模拟测试使用|
 |smarty.conf     |本地测试的 Smarty 引擎的配置文件，common 模块包含即可|本地模拟测试使用|
 |fis-conf.js     |fis3 的配置文件| fis3 构建工具使用 |
+|build.sh| 上线编译机执行脚本（baidu 产品需要）| 编译机使用 |
 
 *以上目录文件不是都必须需要，一般都会包含page、widget俩目录*
 
@@ -382,3 +383,50 @@ fis.match('*.tpl', {
     deploy: push('/home/work/odp')
 });
 ```
+
+### 上线
+
+**以下内容不适合非百度团队，非百度团队可以按照自己的上线内部系统上线。**
+
+度厂上线的流程大概粗略是这个样子（不详说，避免请喝茶），直说 FIS 相关的部分。
+
+从某平台新建一个上线版本，并且修改编译机器为**ts_64**编译机，然后点击编译，这时候某平台会把模块代码传到对应编译机器进行编译，编译完后把结果上传到产品库。
+
+上线平台从产品库拿编译后的代码上线。
+
+其中编译平台执行模块根目录下的 **build.sh** 进行编译的。所以只需要把 FIS3 构建的命令写到这个文件中即可。
+
+*build.sh*
+```bash
+#!/bin/bash
+
+MOD_NAME="output"
+TAR="$MOD_NAME.tar.gz"
+
+# add path
+export PATH=/home/fis/npm/bin:$PATH
+#show fis-plus version
+fis3 --version --no-color
+
+#通过 fis3 命令进行构建，构建的 media 为 prod ，这个可以根据用户具体配置修改
+fis3 release prod -d output
+#进入output目录
+cd output
+#删除产出的test目录
+rm -rf test
+
+#将output目录进行打包
+tar zcf $TAR ./*
+mv $TAR ../
+
+cd ..
+rm -rf output
+
+mkdir output
+
+mv $TAR output/
+
+echo "build end"
+``` 
+
+
