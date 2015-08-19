@@ -297,3 +297,27 @@ body {
 - name 资源的 ID
 
 **注意** `require` 和 `uri` 处理的资源必须在 **静态资源映射表** 中有记录，如果没有记录无法正常工作。
+
+
+#### widget
+
+FIS 模块化组件加载接口，加载某个模板并收集模板依赖的所有静态资源。
+
+```
+{%widget name="common:widget/header/header.tpl"%}
+```
+
+- name tpl 的 ID
+
+**widget** 局部变量
+
+```
+{%widget name="common:widget/header/header.tpl" info=$data.header.info%}
+```
+
+如上，`$data.header.info` 被赋值给 `info` 属性，`info` 属性可以直接在模板中被取值，而修改 `$info` 不会对 `$data.header.info` 造成影响。
+
+*header.tpl*
+```smarty
+{%$info.title%}
+```
