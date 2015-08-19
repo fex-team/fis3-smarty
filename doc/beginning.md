@@ -292,8 +292,8 @@ fis.match('*.js', {
 那么上传配置如下
 
 ```js
-var RECEIVER = 'http://qa.0.q1.baidu.com:8099/receiver.php'; // 接收端 url
 // vi fis-conf.js
+var RECEIVER = 'http://qa.0.q1.baidu.com:8099/receiver.php'; // 接收端 url
 
 // 静态资源
 fis.match('*', {
@@ -317,7 +317,7 @@ fis.match('/plugin/*.php', {
         receiver: RECEIVER,
         to: '/home/work/smarty' // to = $to + $file.release
     })
-})
+});
 
 // 模板
 fis.match('*.tpl', {
@@ -346,3 +346,39 @@ $ fis3 inspect --files='/plugin/FISResource.class.php'
 我们就得到了 `FISResource.class.php` `release` 属性的值，那么最终传到远端机器的路径为 `/home/work/odp/smarty/plugin/FISResource.class.php`。
 
 很多同学设置 `http-push` 属性 `to` 时设置的居然是本机的路径，再次强调这个属性的值是远端机器的路径，即部署了 `receiver.php` 机器的路径。
+
+#### 扩展阅读
+
+可能有人觉着这样配置重复太多了，那么我们就优化一下，配置文件是 js 所以可以发挥你无限的想象力。
+
+```js
+// vi fis-conf.js
+
+var RECEIVER = 'http://qa.0.q1.baidu.com:8099/receiver.php'; // 接收端 url
+function push(to) {
+    return fis.plugin('http-push', {
+        receiver: RECEIVER,
+        to: to  // to = $to + $file.release
+    });
+}
+
+// 静态资源
+fis.match('*', {
+    deploy: push('/home/work/webroot')
+});
+
+// map.json
+fis.match('*-map.json', {
+    deploy: push('/home/work/odp/template')
+});
+
+// smarty 插件
+fis.match('/plugin/*.php', {
+    deploy: push('/home/work/smarty')
+});
+
+// 模板
+fis.match('*.tpl', {
+    deploy: push('/home/work/odp')
+});
+```
