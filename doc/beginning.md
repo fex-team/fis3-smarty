@@ -2,7 +2,13 @@
 
 ### 开始前的说明
 
+在开始介绍之前我不得不着重强调一下，fis3-smarty 已经以来了所有项目中以来的插件，默认[技术选型](#技术选型)下你不需要安装其他任何 fis 插件。
+
+#### 技术选型
+
 - js 模块化使用 **commonJS** 规范，模块框架 `mod.js`
+- less 支持
+- 前端模板选用 baiduTemplate
 
 ### 安装使用
 
@@ -141,3 +147,117 @@ fis3 server start --type php --rewrite
 执行成功的话，会打开你的默认浏览器并得出 Demo 的运行结果。
 
 ![](./img/home.png)
+
+> 可能看上去简陋了一点，但说明问题就行了，美化的事情就交给专业前端同学吧，我半路出家的就不瞎搞了。
+
+### 打包
+
+合并静态资源是前端构建工具的基本能力，所以此处介绍一下 smarty 解决方案里面如何打包。**再次强调，默认情况下不需要安装任何打包相关的插件**。
+
+如 http://fis.baidu.com 介绍，给文件分配 `packTo` 属性即可完成打包。
+
+```js
+fis.match('*.css', {
+    packTo: '/static/aio.css'
+});
+
+fis.match('*.less', {
+    packTo: '/static/aio.css'
+});
+```
+
+解释一下；
+
+第一个 `fis.match` 给所有的 `.css` 文件分配了属性 `packTo` 值为 `/static/aio.css`，意思是所有的 `.css` 文件讲被合并到 `/static/aio.css` 文件中。
+
+第二个 `fis.match` 同样给所有的 `.less` 文件分配属性 `packTo` 同样值跟第一个 `fis.match` 的 `packTo` 是相同的，意思是将所有的 `.less` 文件也打包到 `/static/aio.css` 文件中。由于 `.less` 在 `parser` 阶段就预编译为 `css` 文件了，所以可以这么做。
+
+这样，就把 `.less` 和 `.css` 文件合并到了文件 `/static/aio.css`；当然以上配置等价于
+
+```js
+fis.match('*.{css,less}', {
+    packTo: '/static/aio.css'
+});
+```
+- 关于 `fis.match` 请具体参考文档 http://fis.baidu.com/fis3/docs/api/config-api.html#fis.match()
+
+可能看到此处，有人会疑惑，当多个文件打包到**同一个打包文件**时顺序如何调整？
+
+关于顺序，在 FIS 中可以通过 `@require` 来做调整，比如
+
+```
+/static/m.css
+/static/a.css
+```
+
+m.css 必须在 a.css 之前，那么在 a.css 书写依赖 m.css 即可。
+
+```css
+/* @require ./m.css */
+.a {
+
+}
+```
+
+当然有些人觉着上面这种方式太麻烦了，所以我们提供了 `packOrder` 属性来做一些顺序调整；
+
+```js
+fis.match('a.css', {
+    packOrder: -1,
+    packTo: '/static/pkg.css'
+});
+
+fis.match('m.css', {
+    packOrder: -2,
+    packTo: '/static/pkg.css'
+})
+```
+
+`packOrder` 的值越小越靠前，默认值为 `0`
+
+- `packOrder` 请参考文档 http://fis.baidu.com/fis3/docs/api/config-props.html#packOrder
+
+有些人可能还不太习惯这种打包方式，特别是 fis-plus 转过来的同学，不过你慢慢就会喜欢上此种方式的。由于配置是 js 的，所以可以发挥你的想象力，按照你想要的方式定制配置接口。
+
+
+### 静态资源添加CDN
+
+其实添加 CDN 在 FIS 里面只是**资源定位**的一小块功能，但考虑到比较常用就单拎出来说明；
+
+添加 CDN 说白了就是在所有静态资源 URL 前面加上一个 CDN 的域名，具体 CDN 是什么可能需要你 Google 或者 百度 一下。
+
+在 FIS3 中添加这个 CDN 域名很简单，只需要给文件分配 `domain` 属性即可。
+
+```js
+fis.match ('*.js', {
+    domain: 'http://cdn.baidu.com/v0'
+});
+```
+
+这样所有 js 文件引用的 url 都会在前面加上这样一个域名。
+
+#### 扩展阅读
+
+当然这个功能同样适用于哪些需要后端同学传一个
+
+```php
+<script src="<?=$base_url?>/static/a.js"></script>
+```
+
+的场景。
+
+开发时只需要
+
+```html
+<script src="/static/a.js"></script>
+```
+
+最后通过 domain 配置具体的 `$base_url`
+
+```js
+fis.match('*.js', {
+    domain: '/public' // 如果 $base_url == /public
+});
+```
+
+这也解释了很多跟后端结合时不知道这个 `$base_url` 怎么处理的情形。

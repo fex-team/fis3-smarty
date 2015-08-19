@@ -9,6 +9,8 @@ fis3-smarty 作为 fis 时代 fis-plus 解决方案的替代品，针对 Smarty 
     + [一个简单的例子](./beginning.md#一个简单的例子)
     + [构建](./beginning.md#构建)
     + [预览](./beginning.md#预览)
+    + [打包](./beginning.md#打包)
+    + [静态资源添加CDN](./beginning.md#静态资源添加CDN)
     + [发布测试机](./beginning.md#发布测试机)
     + [上线](./beginning.md#上线)
 - [开发](./dev.md)
