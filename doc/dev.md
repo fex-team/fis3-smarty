@@ -103,4 +103,44 @@ Smarty 解决方案中通过后端模块化框架来完成这些事情。
 
 #### 后端模块化框架
 
-上面针对于 JS 组件化做了一下说明，依赖分析交给了后端框架。
+上面针对于 JS 组件化做了一下说明，依赖分析交给了后端框架。后端框架计算依赖直接读取分析**静态资源映射表**，由构建工具生成。
+
+
+### 前端模板的使用
+
+前端模板在 FIS 都是需要进行预编译的，预编译成可执行的 JS 代码。在 Smarty 解决方案中前端模板后缀一般是 `.tmpl`，使用时需要提前配置。
+
+```js
+fis.match('*.tmpl', {
+    rExt: '.js',
+    parser: fis.plugin('utc') // underscore 中的模板引擎
+});
+```
+
+或者
+
+```js
+fis.match('*.tmpl', {
+    rExt: '.js',
+    parser: fis.plugin('bdtmpl') // baiduTemplate
+});
+```
+
+> 你也可以选择自己喜欢的前端模板，安装对应 FIS 解析插件即可。
+
+那么在 js 中使用前端模板，直接 `__inline` 对应模板即可。
+
+```js
+
+var tmpl = __inline('./view.tmpl');
+
+console.log(tmpl(data)); // render 出 html 结果
+
+```
+
+### Smarty插件
+
+介绍提供的 Smarty 插件的使用方法；
+
+
+
