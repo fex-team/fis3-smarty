@@ -517,7 +517,7 @@ Smarty 解决方案提供一种模板由前端负责，通过数据跟后端分�
     template ^\/xxxx  A/page/index.tpl
     ```
 
-    rewrite 和 redirect 规则配置的文件相对于 `www` 目录（`fis3 server open` 打开此目录）
-    template 相对于 `www/template` 目录
+    - rewrite 和 redirect 规则配置的文件相对于 `www` 目录（`fis3 server open` 打开此目录）
+    - template 相对于 `www/template` 目录
 
 #### 数据模拟
