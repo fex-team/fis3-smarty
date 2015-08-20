@@ -112,9 +112,7 @@ module.exports = function(fis, isMount) {
     });
   
     // 模块化支持
-    fis.hook('module', {
-      mode: 'commonJs'
-    });
+    fis.hook('commonjs');
 
     // map.json
     fis.match('::package', {
