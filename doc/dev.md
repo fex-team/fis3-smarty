@@ -521,3 +521,57 @@ Smarty 解决方案提供一种模板由前端负责，通过数据跟后端分�
     - template 相对于 `www/template` 目录
 
 #### 数据模拟
+
+支持数据格式 `json`、`php` 两种，数据和页面对应规则；
+
+> `php` 数据优于 `json`，互斥
+
+```
+/page/index.tpl
+/test/page/index.php
+/page/about.tpl
+/test/page/about.json
+```
+
+- php 数据
+
+    ```php
+    <?php
+    $fis_data = array();
+    ```
+    - 赋值 `$fis_data` 即可，在对应页面获得设置的数据。
+
+    ```php
+    <?php
+    $fis_data = array(
+        'site' => array(
+            'title' => 'fis3-smarty demo'
+        )
+    );
+    ```
+
+    对应模板使用
+
+    ```smarty
+    ...
+    <title>{%$site.title%}</title>
+    ...
+    ```
+
+- json 数据
+
+    ```json
+    {
+        "site": {
+            "title": "fis3-smarty demo"
+        }
+    }
+    ```
+    
+    对应模板使用
+
+    ```smarty
+    ...
+    <title>{%$site.title%}</title>
+    ...
+    ```
