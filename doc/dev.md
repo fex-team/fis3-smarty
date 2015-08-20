@@ -471,3 +471,53 @@ fis.match('*.tpl', {
     ]
 });
 ```
+
+### 本地测试服务
+
+所谓用 FIS 就前后分离开发了，当然这是假的，前后端分离开发只是一种研发模式，需要一些基础设施提供支持。
+
+Smarty 解决方案提供一种模板由前端负责，通过数据跟后端分离的开发模式。即两个工种提前约定好数据结构、以及 Smarty 的相关目录即可，在[起步](./beginning.md)已提到。
+
+前端负责了模板，那么就得有一个环境解析 Smarty 模板，这样才能做到前后端分离开发。除了能解析 Smarty 模板，还需要有两个功能才能算是完整的模拟环境。
+
+- rewrite URL模拟转发
+- mock-data 数据模拟
+
+> 下提到直接叫 rewrite 或者 mock-data
+
+#### URL模拟转发
+
+- 默认 URL
+
+    对 `page` 目录下的页面模板，有个默认 `url`。规则 `http://host/<namespace>/page/<page>`
+
+    ```
+    A/page/index.tpl
+    ```
+
+    默认访问 URL
+
+    ```
+    http://127.0.0.1:8080/A/page/index
+    ```
+
+- 自定义 URL 转发
+
+    模块目录下的 `server.conf` 文件为配置 `rewrite` 规则的配置文件，包含规则
+    - rewrite  把一个匹配链接定向到某个文件或者 php 逻辑方便处理
+    - redirect 跳转
+    - template 某个匹配 URL 解析某个 .tpl 文件
+
+    *例子*
+
+    ```
+    # # 开头的为注释
+    rewrite ^\/ajax.* /test/A/data/ajax.json
+    redirect ^\/post\/(\d+) /B/page/index?id=$1
+    template ^\/xxxx  A/page/index.tpl
+    ```
+
+    rewrite 和 redirect 规则配置的文件相对于 `www` 目录（`fis3 server open` 打开此目录）
+    template 相对于 `www/template` 目录
+
+#### 数据模拟
