@@ -2,6 +2,32 @@
 
 主要介绍代码开发时 Smarty 解决方案提供的一些用法的使用。
 
+**| NOTICE |** 案例以及文档中默认的 Smarty 分界符为 `{%`、`%}` 
+
+### 设置Smarty分界符
+
+设置 Smarty 分界符，如果本地开发需要设置两处。
+
+- 构建工具的分界符
+
+    *fis-conf.js*
+    ```js
+    fis.set('smarty', {
+        'left_delimiter': '{#',
+        'right_delimiter': '#}'
+    });
+    ```
+
+- 本地测试环境的分界符
+
+    模块根目录下的，一般在 common 下放置即可。
+    
+    *smarty.conf*
+    ```ini
+    left_delimiter="{#"
+    right_delimiter="#}"
+    ```
+    
 ### 模块化开发
 
 FIS 把模板、js、css都纳入了模块化的范围，互相标记生成依赖树，统一做管理。而不像其他方案只针对于 js 做模块化处理。
@@ -567,7 +593,7 @@ Smarty 解决方案提供一种模板由前端负责，通过数据跟后端分�
         }
     }
     ```
-    
+
     对应模板使用
 
     ```smarty
