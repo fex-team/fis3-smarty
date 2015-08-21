@@ -122,7 +122,7 @@ module.exports = function(fis, isMount) {
         var path = require('path')
         var root = fis.project.getProjectPath();
         var map = fis.file.wrap(path.join(root, fis.get('namespace') + '-map.json'));;
-        map.setContent(JSON.stringify(ret.map));
+        map.setContent(JSON.stringify(ret.map, null, map.optimizer ? null : 4));
         ret.pkg[map.subpath] = map;
       }
     });
