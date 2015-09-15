@@ -67,7 +67,7 @@ module.exports = function(fis, isMount) {
     '/widget/{*.{js,css},**/*.{js,css}}': {
       isMod: true
     },
-    '/{plugin,smarty.conf,domain.conf,**.php}': {
+    '/{plugin/**.*,smarty.conf,domain.conf,**.php}': {
       release: '$0'
     },
     'server.conf': {
