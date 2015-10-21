@@ -41,7 +41,6 @@ module.exports = function(fis, isMount) {
     },
     '/(**.tpl)': {
       preprocessor: fis.plugin('extlang'),
-      postprocessor: fis.plugin('require-async'),
       optimizer: [
         fis.plugin('smarty-xss'),
         fis.plugin('html-compress')
