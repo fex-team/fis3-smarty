@@ -23,7 +23,7 @@
     "fis-parser-less": "0.1.2",
     "fis-parser-po": "0.0.1",
     "fis-prepackager-js-i18n": "0.0.2",
-    "fis3-hook-commonjs": "0.1.0"
+    "fis3-hook-commonjs": "0.1.1"
   },
   "author": "fis-team",
   "license": "BSD",
