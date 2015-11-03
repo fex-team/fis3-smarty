@@ -40,14 +40,24 @@ fis.media('dev').match('*', {
 ### 本地测试服务
 
 **安装本地模拟环境**
+* fis3 >= 3.2.6
+    
+    ```bash
+    # 命令行在 fis3-smarty 的项目目录。
+    fis3 server start
+    
+    # 不在 fis3-smarty 项目目录
+    fis3 server start --type smarty
+    ```
+* fis3 < 3.2.6
 
-```bash
-fis3 server install server-env
-```
-
-**启动服务**
-
-```bash
-fis3 server start --type php --rewrite
-```
+    ```bash
+    fis3 server install server-env
+    ```
+    
+    **启动服务**
+    
+    ```bash
+    fis3 server start --type php --rewrite
+    ```
 
