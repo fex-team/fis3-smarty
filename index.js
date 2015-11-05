@@ -15,6 +15,8 @@ module.exports = function(fis, isMount) {
     }
   };
 
+  fis.set('server.type', 'smarty');
+
   var matchRules = {
     // all release to $static dir 
     '*': {
