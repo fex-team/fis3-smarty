@@ -47,6 +47,7 @@ fis.media('dev').match('*', {
     fis3 server start
     
     # 不在 fis3-smarty 项目目录
+    npm install -g fis3-server-smarty
     fis3 server start --type smarty
     ```
 * fis3 < 3.2.6
