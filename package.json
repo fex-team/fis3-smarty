@@ -1,6 +1,6 @@
 {
   "name": "fis3-smarty",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Support Smarty end template engine in fis3",
   "main": "index.js",
   "scripts": {
