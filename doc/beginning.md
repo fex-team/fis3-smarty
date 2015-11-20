@@ -125,6 +125,10 @@ fis3 release -r subsiteB
 首先保证你安装了本地**测试模拟环境**套件，如果你忘了安装，按照一下命令安装。
 
 ```
+#fis3 >= 3.2.6
+fis3 server start --type smarty #如果在项目目录执行，--type smarty可省略
+
+#fis3 < 3.2.6
 fis3 server install server-env
 ```
 
