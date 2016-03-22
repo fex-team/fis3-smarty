@@ -33,7 +33,10 @@ module.exports = function(fis, isMount) {
       rExt: '.css'
     },
     '*.tmpl': {
-      parser: fis.plugin('bdtmpl'),
+      parser: fis.plugin('bdtmpl', {
+        LEFT_DELIMITER : '<#',
+        RIGHT_DELIMITER : '#>'
+      }),
       rExt: '.js'
     },
     '*.{css,less}': {
