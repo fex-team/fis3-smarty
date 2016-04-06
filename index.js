@@ -18,7 +18,7 @@ module.exports = function(fis, isMount) {
   fis.set('server.type', 'smarty');
 
   var matchRules = {
-    // all release to $static dir 
+    // all release to $static dir
     '*': {
       release: '/${static}/${namespace}/$0'
     },
@@ -104,6 +104,12 @@ module.exports = function(fis, isMount) {
     // smarty
     fis.set('system.localNPMFolder', path.join(__dirname, 'node_modules'));
 
+    // since fis3@3.3.21
+    // 帮当前目录的查找提前在 global 查找的前面，同时又保证 local 的查找是优先的。
+    if (fis.require.paths && fis.require.paths.length) {
+      fis.require.paths.splice(1, 0, path.join(__dirname, 'node_modules'));
+    }
+
     fis.util.map(sets, function(key, value) {
       fis.set(key, value);
     });
@@ -111,7 +117,7 @@ module.exports = function(fis, isMount) {
     fis.util.map(matchRules, function(selector, rules) {
       fis.match(selector, rules);
     });
-  
+
     // 模块化支持
     fis.hook('commonjs');
 
