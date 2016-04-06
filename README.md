@@ -62,3 +62,12 @@ fis.media('dev').match('*', {
     fis3 server start --type php --rewrite
     ```
 
+
+## 脚手架
+
+```bash
+;  快速启动一个项目
+mkdir demo
+cd demo
+fis3 init php-smarty
+```
