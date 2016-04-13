@@ -146,7 +146,7 @@ fis3 server install server-env
 执行以下命令启动服务
 
 ```
-fis3 server start --type php --rewrite
+fis3 server start --type smarty //启动一次后后面--type smarty会记忆可以不添加
 ```
 
 执行成功的话，会打开你的默认浏览器并得出 Demo 的运行结果。
