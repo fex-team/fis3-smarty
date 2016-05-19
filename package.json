@@ -1,6 +1,6 @@
 {
   "name": "fis3-smarty",
-  "version": "1.1.13",
+  "version": "1.1.14",
   "description": "Support Smarty end template engine in fis3",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "fis-parser-less": "0.1.2",
     "fis-parser-po": "0.0.1",
     "fis-prepackager-js-i18n": "0.0.2",
-    "fis3-hook-commonjs": "0.1.8",
+    "fis3-hook-commonjs": "0.1.19",
     "fis3-server-smarty": "0.0.6"
   },
   "author": "fis-team",
