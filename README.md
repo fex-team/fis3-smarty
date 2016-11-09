@@ -6,6 +6,7 @@
 
 - Smarty 插件、XSS 自动修复、本地测试服务、上线指导等文档参见 [/doc/README.md](doc/README.md)
 - 构建工具文档参见 https://github.com/fex-team/fis3
+- superframe 接入方案 https://github.com/wangqunbaidu/superframe-fisplugin
 
 ### 使用方法
 
