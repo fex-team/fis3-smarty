@@ -279,7 +279,7 @@ fis.match('*.js', {
 
 - `.tpl` 发布到 Smarty 的 `template_dir` 目录下
 - `plugin/*.php` 需要发布到 Smarty 的 `plugins_dir` 目录下
-- `config/*.json` 编译会产出一些 `*.json` 文件，即静态资源映射表；需要发不到 Smarty 的 `config_dir` 目录下
+- `config/*.json` 编译会产出一些 `*.json` 文件，即静态资源映射表；需要发布到 Smarty 的 `config_dir` 目录下
 - 其他静态资源需要发布到静态资源 `webroot` 下
 
 需要按照以上说明上传资源。
